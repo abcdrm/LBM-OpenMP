@@ -1,0 +1,31 @@
+gcc -std=c99 -Wall d2q9-bgk_serial.c -lm -o d2q9-bgk_serial
+kronos@kronos:~/Code/LBM-OpenMP$ ./d2q9-bgk_serial  input_128x128.params obstacles_128x128.dat
+==done==
+Reynolds number:                9.751927375793E+00
+Elapsed time:                   123.943286 (s)
+Elapsed user CPU time:          123.911273 (s)
+Elapsed system CPU time:        0.019998 (s)
+
+icc -std=c99 -Wall d2q9-bgk_serial.c -lm -o d2q9-bgk_serial
+./d2q9-bgk_serial  input_128x128.params obstacles_128x128.dat
+==done==
+Reynolds number:                9.753950119019E+00
+Elapsed time:                   25.260455 (s)
+Elapsed user CPU time:          25.260680 (s)
+Elapsed system CPU time:        0.000000 (s)
+
+icc -Ofast -std=c99 -Wall d2q9-bgk_serial.c -lm -o d2q9-bgk_serial
+./d2q9-bgk_serial  input_128x128.params obstacles_128x128.dat
+==done==
+Reynolds number:                9.757672309875E+00
+Elapsed time:                   24.157027 (s)
+Elapsed user CPU time:          24.144228 (s)
+Elapsed system CPU time:        0.008001 (s)
+
+icc -Ofast -fast -std=c99 -Wall d2q9-bgk_serial.c -lm -o d2q9-bgk_serial
+kronos@kronos:~/Code/LBM-OpenMP$ ./d2q9-bgk_serial  input_128x128.params obstacles_128x128.dat
+==done==
+Reynolds number:                9.757355690002E+00
+Elapsed time:                   23.330957 (s)
+Elapsed user CPU time:          23.322373 (s)
+Elapsed system CPU time:        0.007999 (s)
