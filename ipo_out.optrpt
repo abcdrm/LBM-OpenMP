@@ -1,0 +1,314 @@
+Intel(R) Advisor can now assist with vectorization and show optimization
+  report messages with your source code.
+See "https://software.intel.com/en-us/intel-advisor-xe" for details.
+
+Intel(R) C Intel(R) 64 Compiler for applications running on Intel(R) 64, Version 19.1.0.166 Build 20191121
+
+Compiler options: -fast -qopt-report=5 -qopt-report-phase:vec -vec-threshold0 -std=c99 -Wall -lm -o d2q9-bgk
+
+Begin optimization report for: main(int, char **)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at d2q9-bgk_ver3.c(152,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(154,19)
+   <Peeled loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(154,19)
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(206,13) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(207,13) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(208,13) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][1]>, masked, stride is 9   [ d2q9-bgk_ver3.c(211,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][1]>, masked, stride is 9   [ d2q9-bgk_ver3.c(211,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][5]>, masked, stride is 9   [ d2q9-bgk_ver3.c(212,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][5]>, masked, stride is 9   [ d2q9-bgk_ver3.c(212,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][8]>, masked, stride is 9   [ d2q9-bgk_ver3.c(213,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][8]>, masked, stride is 9   [ d2q9-bgk_ver3.c(213,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(215,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(215,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(216,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(216,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(217,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(217,7) ]
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 0.027
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15452: unmasked strided loads: 6 
+      remark #15453: unmasked strided stores: 3 
+      remark #15460: masked strided loads: 3 
+      remark #15462: unmasked indexed (or gather) loads: 3 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 19 
+      remark #15477: vector cost: 88.500 
+      remark #15478: estimated potential speedup: 0.220 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(154,19)
+   <Remainder loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(155,23)
+   <Peeled loop for vectorization>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(155,23)
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(206,13) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(207,13) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(208,13) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][1]>, masked, stride is 9   [ d2q9-bgk_ver3.c(211,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][1]>, masked, stride is 9   [ d2q9-bgk_ver3.c(211,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][5]>, masked, stride is 9   [ d2q9-bgk_ver3.c(212,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][5]>, masked, stride is 9   [ d2q9-bgk_ver3.c(212,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][8]>, masked, stride is 9   [ d2q9-bgk_ver3.c(213,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][8]>, masked, stride is 9   [ d2q9-bgk_ver3.c(213,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(215,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][3]>, stride is 9   [ d2q9-bgk_ver3.c(215,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(216,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][6]>, stride is 9   [ d2q9-bgk_ver3.c(216,7) ]
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <tmp_cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(217,7) ]
+      remark #15415: vectorization support: non-unit strided load was generated for the variable <tmp_cells->speeds[ii+jj*params.nx][7]>, stride is 9   [ d2q9-bgk_ver3.c(217,7) ]
+      remark #15305: vectorization support: vector length 8
+      remark #15309: vectorization support: normalized vectorization overhead 0.027
+      remark #15300: LOOP WAS VECTORIZED
+      remark #15442: entire loop may be executed in remainder
+      remark #15448: unmasked aligned unit stride loads: 1 
+      remark #15452: unmasked strided loads: 6 
+      remark #15453: unmasked strided stores: 3 
+      remark #15460: masked strided loads: 3 
+      remark #15462: unmasked indexed (or gather) loads: 3 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 19 
+      remark #15477: vector cost: 88.500 
+      remark #15478: estimated potential speedup: 0.220 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(201,3) inlined into d2q9-bgk_ver3.c(155,23)
+   <Remainder loop for vectorization>
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: propagate(const t_param, t_speed *, t_speed *, int *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at d2q9-bgk_ver3.c(237,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(239,5)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(278,9)
+      LOOP END
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(333,9)
+         remark #15389: vectorization support: reference d_equ[_2+5] has unaligned access
+         remark #15389: vectorization support: reference u[_2+5] has unaligned access   [ d2q9-bgk_ver3.c(333,48) ]
+         remark #15389: vectorization support: reference u[_2+5] has unaligned access   [ d2q9-bgk_ver3.c(334,45) ]
+         remark #15389: vectorization support: reference u[_2+5] has unaligned access   [ d2q9-bgk_ver3.c(334,52) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15427: loop was completely unrolled
+         remark #15309: vectorization support: normalized vectorization overhead 1.318
+         remark #15301: MATERIALIZED LOOP WAS VECTORIZED
+         remark #15450: unmasked unaligned unit stride loads: 3 
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 23 
+         remark #15477: vector cost: 5.500 
+         remark #15478: estimated potential speedup: 1.800 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(347,9)
+      LOOP END
+   LOOP END
+LOOP END
+===========================================================================
+
+Begin optimization report for: write_values(const t_param, t_speed *, int *, float *)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at d2q9-bgk_ver3.c(583,3)
+   remark #15382: vectorization support: call to function fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ d2q9-bgk_ver3.c(626,7) ]
+   remark #15344: loop was not vectorized: vector dependence prevents vectorization
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (626:7) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (626:7)
+   remark #15346: vector dependence: assumed OUTPUT dependence between call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (626:7) and call:fprintf(FILE *__restrict__, const char *__restrict__, ...) (626:7)
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(585,5)
+      remark #15527: loop was not vectorized: function call to fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ d2q9-bgk_ver3.c(626,7) ]
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(598,9)
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at d2q9-bgk_ver3.c(639,3)
+   remark #15527: loop was not vectorized: function call to fprintf(FILE *__restrict__, const char *__restrict__, ...) cannot be vectorized   [ d2q9-bgk_ver3.c(641,5) ]
+LOOP END
+===========================================================================
+
+Begin optimization report for: initialise(const char *, const char *, t_param *, t_speed **, t_speed **, int **, float **)
+
+    Report from: Vector optimizations [vec]
+
+
+LOOP BEGIN at d2q9-bgk_ver3.c(454,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk1>
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells_ptr>, stride is 9   [ d2q9-bgk_ver3.c(464,9) ]
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.051
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15453: unmasked strided stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 2.430 
+      remark #15478: estimated potential speedup: 1.210 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder loop for vectorization, Distributed chunk1>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk2>
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells_ptr>, stride is 9   [ d2q9-bgk_ver3.c(463,9) ]
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.051
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15453: unmasked strided stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 2.430 
+      remark #15478: estimated potential speedup: 1.210 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder loop for vectorization, Distributed chunk2>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk3>
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells_ptr>, stride is 9   [ d2q9-bgk_ver3.c(462,9) ]
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.051
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15453: unmasked strided stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 2.430 
+      remark #15478: estimated potential speedup: 1.210 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder loop for vectorization, Distributed chunk3>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk4>
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells_ptr>, stride is 9   [ d2q9-bgk_ver3.c(461,9) ]
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.051
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15453: unmasked strided stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 2.430 
+      remark #15478: estimated potential speedup: 1.210 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder loop for vectorization, Distributed chunk4>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk5>
+      remark #15329: vectorization support: non-unit strided store was emulated for the variable <cells_ptr>, stride is 9   [ d2q9-bgk_ver3.c(459,9) ]
+      remark #15305: vectorization support: vector length 16
+      remark #15309: vectorization support: normalized vectorization overhead 0.051
+      remark #15301: PARTIAL LOOP WAS VECTORIZED
+      remark #15453: unmasked strided stores: 1 
+      remark #15475: --- begin vector cost summary ---
+      remark #15476: scalar cost: 3 
+      remark #15477: vector cost: 2.430 
+      remark #15478: estimated potential speedup: 1.210 
+      remark #15488: --- end vector cost summary ---
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder loop for vectorization, Distributed chunk5>
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Distributed chunk6>
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(466,9)
+         remark #15389: vectorization support: reference cells_ptr has unaligned access
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 4
+         remark #15427: loop was completely unrolled
+         remark #15309: vectorization support: normalized vectorization overhead 0.800
+         remark #15301: MATERIALIZED LOOP WAS VECTORIZED
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 3 
+         remark #15477: vector cost: 1.250 
+         remark #15478: estimated potential speedup: 1.330 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+   LOOP END
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(456,5)
+   <Remainder, Distributed chunk6>
+   LOOP END
+LOOP END
+
+LOOP BEGIN at d2q9-bgk_ver3.c(474,3)
+   remark #15542: loop was not vectorized: inner loop was already vectorized
+
+   LOOP BEGIN at d2q9-bgk_ver3.c(476,5)
+      remark #15542: loop was not vectorized: inner loop was already vectorized
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(476,5)
+         remark #15389: vectorization support: reference obstacles_ptr has unaligned access   [ d2q9-bgk_ver3.c(478,9) ]
+         remark #15381: vectorization support: unaligned access used inside loop body
+         remark #15305: vectorization support: vector length 8
+         remark #15309: vectorization support: normalized vectorization overhead 0.600
+         remark #15300: LOOP WAS VECTORIZED
+         remark #15451: unmasked unaligned unit stride stores: 1 
+         remark #15475: --- begin vector cost summary ---
+         remark #15476: scalar cost: 3 
+         remark #15477: vector cost: 0.620 
+         remark #15478: estimated potential speedup: 4.000 
+         remark #15488: --- end vector cost summary ---
+      LOOP END
+
+      LOOP BEGIN at d2q9-bgk_ver3.c(476,5)
+      <Remainder loop for vectorization>
+      LOOP END
+   LOOP END
+LOOP END
+
+LOOP BEGIN at d2q9-bgk_ver3.c(492,3)
+   remark #15521: loop was not vectorized: loop control variable was not identified. Explicitly compute the iteration count before executing the loop or try using canonical loop form from OpenMP specification
+LOOP END
+===========================================================================
