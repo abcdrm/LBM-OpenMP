@@ -60,7 +60,7 @@
 #define NSPEEDS         9
 #define FINALSTATEFILE  "final_state.dat"
 #define AVVELSFILE      "av_vels.dat"
-#define MY_DEPRECATED_BEGIN \
+#define IVDEP_VECTOR_ALIGNED \
     _Pragma("ivdep") \
     _Pragma("vector aligned")
 
@@ -162,6 +162,7 @@ int main(int argc, char* argv[])
 
   for (int jj = 0; jj < params.ny; jj++)
   {
+    IVDEP_VECTOR_ALIGNED
     for (int ii = 0; ii < params.nx; ii++)
     {
       /* centre */
@@ -239,6 +240,7 @@ int accelerate_flow(const t_param params, t_speed* restrict cells, int* restrict
   /* modify the 2nd row of the grid */
   int jj = params.ny - 2;
 
+  IVDEP_VECTOR_ALIGNED
   for (int ii = 0; ii < params.nx; ii++)
   {
     /* if the cell is not occupied and
@@ -277,6 +279,7 @@ float propagate(const t_param params, t_speed* restrict cells, t_speed* restrict
   /* loop over _all_ cells */
   for (int jj = 0; jj < params.ny; jj++)
   {
+    IVDEP_VECTOR_ALIGNED
     for (int ii = 0; ii < params.nx; ii++)
     {
       /* determine indices of axis-direction neighbours
@@ -348,11 +351,12 @@ float propagate(const t_param params, t_speed* restrict cells, t_speed* restrict
         d_equ[4] = w1 * local_density * (1.f + u[4] / c_sq + (u[4] * u[4]) / (c_2sq2) - u_sq / (c_2sq));
         
         /* diagonal speeds: weight w2 */
-        d_equ[5] = w2 * local_density * (1.f + u[5] / c_sq + (u[5] * u[5]) / (c_2sq2) - u_sq / (c_2sq));
+        
         d_equ[6] = w2 * local_density * (1.f + u[6] / c_sq + (u[6] * u[6]) / (c_2sq2) - u_sq / (c_2sq));
         d_equ[7] = w2 * local_density * (1.f + u[7] / c_sq + (u[7] * u[7]) / (c_2sq2) - u_sq / (c_2sq));
         d_equ[8] = w2 * local_density * (1.f + u[8] / c_sq + (u[8] * u[8]) / (c_2sq2) - u_sq / (c_2sq));
-
+        d_equ[5] = w2 * local_density * (1.f + u[5] / c_sq + (u[5] * u[5]) / (c_2sq2) - u_sq / (c_2sq));
+        
         /* relaxation step */
         tmp_cells->speeds[0][ii + jj * params.nx] = speeds[0] + params.omega * (d_equ[0] - speeds[0]);
         tmp_cells->speeds[1][ii + jj * params.nx] = speeds[1] + params.omega * (d_equ[1] - speeds[1]);
