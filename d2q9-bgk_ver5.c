@@ -151,8 +151,8 @@ int main(int argc, char* argv[])
 
   for (int i = 0; i < NSPEEDS; i++)
   {
-    cells->speeds[i]     = (float*) _mm_malloc(sizeof(float) * (params.ny * params.nx), 64);
-    tmp_cells->speeds[i] = (float*) _mm_malloc(sizeof(float) * (params.ny * params.nx), 64);
+    cells->speeds[i]     = (float*) _mm_malloc(sizeof(float) * (params.ny * params.nx), 32);
+    tmp_cells->speeds[i] = (float*) _mm_malloc(sizeof(float) * (params.ny * params.nx), 32);
   }
 
   /* initialise densities */
@@ -449,17 +449,17 @@ int initialise(const char* paramfile, const char* obstaclefile,
   */
 
   /* main grid */
-  *cells_ptr = (t_speed*)_mm_malloc(sizeof(t_speed), 64);
+  *cells_ptr = (t_speed*)_mm_malloc(sizeof(t_speed), 32);
 
   if (*cells_ptr == NULL) die("cannot allocate memory for cells", __LINE__, __FILE__);
 
   /* 'helper' grid, used as scratch space */
-  *tmp_cells_ptr = (t_speed*)_mm_malloc(sizeof(t_speed), 64);
+  *tmp_cells_ptr = (t_speed*)_mm_malloc(sizeof(t_speed), 32);
 
   if (*tmp_cells_ptr == NULL) die("cannot allocate memory for tmp_cells", __LINE__, __FILE__);
 
   /* the map of obstacles */
-  *obstacles_ptr = _mm_malloc(sizeof(int) * (params->ny * params->nx), 64);
+  *obstacles_ptr = _mm_malloc(sizeof(int) * (params->ny * params->nx), 32);
 
   if (*obstacles_ptr == NULL) die("cannot allocate column memory for obstacles", __LINE__, __FILE__);
 
@@ -504,7 +504,7 @@ int initialise(const char* paramfile, const char* obstaclefile,
   ** allocate space to hold a record of the avarage velocities computed
   ** at each timestep
   */
-  *av_vels_ptr = (float*)_mm_malloc(sizeof(float) * params->maxIters, 64);
+  *av_vels_ptr = (float*)_mm_malloc(sizeof(float) * params->maxIters, 32);
 
   return EXIT_SUCCESS;
 }
