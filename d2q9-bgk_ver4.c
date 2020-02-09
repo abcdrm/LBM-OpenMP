@@ -162,7 +162,6 @@ int main(int argc, char* argv[])
 
   for (int jj = 0; jj < params.ny; jj++)
   {
-    MY_DEPRECATED_BEGIN
     for (int ii = 0; ii < params.nx; ii++)
     {
       /* centre */
@@ -184,7 +183,6 @@ int main(int argc, char* argv[])
   gettimeofday(&timstr, NULL);
   tic = timstr.tv_sec + (timstr.tv_usec / 1000000.0);
 
-  MY_DEPRECATED_BEGIN
   for (int tt = 0; tt < params.maxIters; tt += 2)
   {
     av_vels[tt] = timestep(params, cells, tmp_cells, obstacles);
@@ -241,7 +239,6 @@ int accelerate_flow(const t_param params, t_speed* restrict cells, int* restrict
   /* modify the 2nd row of the grid */
   int jj = params.ny - 2;
 
-  MY_DEPRECATED_BEGIN
   for (int ii = 0; ii < params.nx; ii++)
   {
     /* if the cell is not occupied and
@@ -318,29 +315,13 @@ float propagate(const t_param params, t_speed* restrict cells, t_speed* restrict
         tmp_cells->speeds[8][ii + jj*params.nx] = speeds[6];
       } else {
         /* compute local density total */
-        float local_density = 0.f;
-
-        for (int kk = 0; kk < NSPEEDS; kk++)
-        {
-          local_density += speeds[kk];
-        }
+        float local_density;
+        local_density = speeds[0] + speeds[1] + speeds[2] + speeds[3] + speeds[4] + speeds[5] + speeds[6] + speeds[7] + speeds[8];
 
         /* compute x velocity component */
-        float u_x = (speeds[1]
-                   + speeds[5]
-                   + speeds[8]
-                   - speeds[3]
-                   - speeds[6]
-                   - speeds[7]
-                    ) / local_density;
+        float u_x = (speeds[1] + speeds[5] + speeds[8] - speeds[3] - speeds[6] - speeds[7]) / local_density;
         /* compute y velocity component */
-        float u_y = (speeds[2]
-                   + speeds[5]
-                   + speeds[6]
-                   - speeds[4]
-                   - speeds[7]
-                   - speeds[8]
-                    ) / local_density;
+        float u_y = (speeds[2] + speeds[5] + speeds[6] - speeds[4] - speeds[7] - speeds[8]) / local_density;
 
         /* velocity squared */
         float u_sq = u_x * u_x + u_y * u_y;
@@ -359,33 +340,30 @@ float propagate(const t_param params, t_speed* restrict cells, t_speed* restrict
         /* equilibrium densities */
         float d_equ[NSPEEDS];
         /* zero velocity density: weight w0 */
-        d_equ[0] = w0 * local_density
-                   * (1.f - u_sq / (c_2sq));
+        d_equ[0] = w0 * local_density * (1.f - u_sq / (c_2sq));
+        
         /* axis speeds: weight w1 */
-        MY_DEPRECATED_BEGIN
-        for (int i = 1; i <= 4; i++)
-        {
-          d_equ[i] = w1 * local_density * (1.f + u[i] / c_sq
-                                         + (u[i] * u[i]) / (c_2sq2)
-                                         - u_sq / (c_2sq));
-        }
+        d_equ[1] = w1 * local_density * (1.f + u[1] / c_sq + (u[1] * u[1]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[2] = w1 * local_density * (1.f + u[2] / c_sq + (u[2] * u[2]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[3] = w1 * local_density * (1.f + u[3] / c_sq + (u[3] * u[3]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[4] = w1 * local_density * (1.f + u[4] / c_sq + (u[4] * u[4]) / (c_2sq2) - u_sq / (c_2sq));
+        
         /* diagonal speeds: weight w2 */
-        MY_DEPRECATED_BEGIN
-        for (int i = 5; i <= 8; i++)
-        {
-          d_equ[i] = w2 * local_density * (1.f + u[i] / c_sq
-                                         + (u[i] * u[i]) / (c_2sq2)
-                                         - u_sq / (c_2sq));
-        }
+        d_equ[5] = w2 * local_density * (1.f + u[5] / c_sq + (u[5] * u[5]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[6] = w2 * local_density * (1.f + u[6] / c_sq + (u[6] * u[6]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[7] = w2 * local_density * (1.f + u[7] / c_sq + (u[7] * u[7]) / (c_2sq2) - u_sq / (c_2sq));
+        d_equ[8] = w2 * local_density * (1.f + u[8] / c_sq + (u[8] * u[8]) / (c_2sq2) - u_sq / (c_2sq));
 
         /* relaxation step */
-        MY_DEPRECATED_BEGIN
-        for (int kk = 0; kk < NSPEEDS; kk++)
-        {
-          tmp_cells->speeds[kk][ii + jj*params.nx] = speeds[kk]
-                                                  + params.omega
-                                                  * (d_equ[kk] - speeds[kk]);
-        }
+        tmp_cells->speeds[0][ii + jj * params.nx] = speeds[0] + params.omega * (d_equ[0] - speeds[0]);
+        tmp_cells->speeds[1][ii + jj * params.nx] = speeds[1] + params.omega * (d_equ[1] - speeds[1]);
+        tmp_cells->speeds[2][ii + jj * params.nx] = speeds[2] + params.omega * (d_equ[2] - speeds[2]);
+        tmp_cells->speeds[3][ii + jj * params.nx] = speeds[3] + params.omega * (d_equ[3] - speeds[3]);
+        tmp_cells->speeds[4][ii + jj * params.nx] = speeds[4] + params.omega * (d_equ[4] - speeds[4]);
+        tmp_cells->speeds[5][ii + jj * params.nx] = speeds[5] + params.omega * (d_equ[5] - speeds[5]);
+        tmp_cells->speeds[6][ii + jj * params.nx] = speeds[6] + params.omega * (d_equ[6] - speeds[6]);
+        tmp_cells->speeds[7][ii + jj * params.nx] = speeds[7] + params.omega * (d_equ[7] - speeds[7]);
+        tmp_cells->speeds[8][ii + jj * params.nx] = speeds[8] + params.omega * (d_equ[8] - speeds[8]);
 
         tot_u += sqrtf((u_x * u_x) + (u_y * u_y));
         /* increase counter of inspected cells */
