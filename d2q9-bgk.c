@@ -165,6 +165,7 @@ int main(int argc, char* argv[])
   float w1 = params.density       / 9.f;
   float w2 = params.density       / 36.f;
 
+  #pragma omp parallel for schedule(static)
   for (int jj = 0; jj < params.ny; jj++)
   {
     IVDEP_VECTOR_ALIGNED
@@ -237,8 +238,6 @@ int accelerate_flow(const t_param params, t_speed* cells, int* obstacles)
 
   /* modify the 2nd row of the grid */
   int jj = params.ny - 2;
-  // int num_threads = omp_get_num_threads();
-  // int parallel_loops_num = ((params.nx / num_threads) / 8) * num_threads * 8;
 
   IVDEP_VECTOR_ALIGNED
   for (int ii = 0; ii < params.nx; ii++)
@@ -261,6 +260,8 @@ int accelerate_flow(const t_param params, t_speed* cells, int* obstacles)
     }
   }
 
+  // int num_threads = omp_get_num_threads();
+  // int parallel_loops_num = ((params.nx / num_threads) / 8) * num_threads * 8;
   // IVDEP_VECTOR_ALIGNED_OMP_PARALLEL_FOR
   // for (int ii = 0; ii < parallel_loops_num; ii++)
   // {
@@ -343,6 +344,7 @@ float propagate(const t_param params, t_speed* cells, t_speed* tmp_cells, int* o
   
   int idx0, idx1, idx2, idx3, idx4, idx5, idx6, idx7, idx8;
   
+  #pragma omp parallel for reduction(+:tot_cells, tot_u) schedule(static)
   for (int jj = 0; jj < params.ny; jj++)
   {
     #pragma ivdep
