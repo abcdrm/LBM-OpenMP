@@ -1,3 +1,0 @@
-source /opt/intel/parallel_studio_xe_2020.0.088/bin/psxevars.sh
-icc -fast -qopenmp -std=c99 -Wall -qopt-report=5 -qopt-report-phase:vec d2q9-bgk_ver5.c -lm -o d2q9-bgk
-./d2q9-bgk  input_128x128.params obstacles_128x128.dat
